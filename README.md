@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of async/await is to simplify the syntax necessary to consume promise-based APIs.
+The purpose of `async`/`await` is to simplify the syntax necessary to consume promise-based APIs.
 
 ## Example
 
@@ -20,13 +20,14 @@ Response:
 foo
 ```
 
-### Promise Chaining Sample
+### Using Promise Chaining
 
 ```js
 function foo() {
   fetch("https://mywebsite.cc/api/foo")
     .then((responseObj) => responseObj.text())
-    .then((content) => console.log(content));
+    .then((content) => console.log(content))
+    .catch((error) => console.error(error));
 }
 ```
 
@@ -34,10 +35,16 @@ After the promise returned by `fetch` is fulfilled, the promise invokes the call
 
 ### Using Async Function
 
+With `async`/`await`, it's recommended to handle errors with `try...catch` mechanism.
+
 ```js
 async function foo() {
-  const responseObj = await fetch("https://mywebsite.cc/api/foo");
-  const content = await responseObj.text();
-  console.log(content);
+  try {
+    const responseObj = await fetch("https://mywebsite.cc/api/foo");
+    const content = await responseObj.text();
+    console.log(content);
+  } catch (error) {
+    console.error(error);
+  }
 }
 ```
